@@ -15,7 +15,7 @@ class _LocationInputState extends State<LocationInput> {
 
     bool serviceEnabled;
     PermissionStatus permissionGranted;
-    LocationData _locationData;
+    LocationData locationData;
 
     serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
@@ -34,12 +34,10 @@ class _LocationInputState extends State<LocationInput> {
     }
     _isGettingLocation = true;
 
-    _locationData = await location.getLocation();
+    locationData = await location.getLocation();
     setState(() {
       _isGettingLocation = false;
     });
-    print(_locationData.longitude);
-    print(_locationData.latitude);
   }
 
   @override

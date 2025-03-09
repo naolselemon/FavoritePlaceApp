@@ -1,5 +1,4 @@
 import "package:favorite_places/provider/place_provider.dart";
-import "package:favorite_places/screens/place_detail.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
@@ -38,7 +37,7 @@ class _PlacesState extends ConsumerState<PlacesScreen> {
             IconButton(
               icon: const Icon(Icons.add),
               onPressed: addNewPlace,
-            )
+            ),
           ],
         ),
         body: PlacesList(places: places));
