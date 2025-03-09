@@ -27,7 +27,7 @@ class _PlacesState extends ConsumerState<PlacesScreen> {
     final places = ref.watch(placeProvider);
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           title: Text(
             "Great Places",
             style: Theme.of(context).textTheme.titleMedium!.copyWith(

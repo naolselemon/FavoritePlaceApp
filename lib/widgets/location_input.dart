@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:location/location.dart";
 
 class LocationInput extends StatefulWidget {
   const LocationInput({super.key});
@@ -8,11 +9,53 @@ class LocationInput extends StatefulWidget {
 }
 
 class _LocationInputState extends State<LocationInput> {
+  var _isGettingLocation = false;
+  void _getCurrentLocation() async {
+    Location location = Location();
+
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+    LocationData _locationData;
+
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
+    }
+
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+    _isGettingLocation = true;
+
+    _locationData = await location.getLocation();
+    setState(() {
+      _isGettingLocation = false;
+    });
+    print(_locationData.longitude);
+    print(_locationData.latitude);
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget previewContent = Text("No location is chosen",
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(color: Theme.of(context).colorScheme.tertiary));
+    if (_isGettingLocation) {
+      previewContent = const CircularProgressIndicator();
+    }
     return Column(
       children: [
         Container(
+          alignment: Alignment.center,
           decoration: BoxDecoration(
             border: Border.all(
               width: 1,
@@ -20,10 +63,8 @@ class _LocationInputState extends State<LocationInput> {
             ),
           ),
           height: 160,
-          child: Text(
-            "No location is chosen",
-            style: Theme.of(context).textTheme.bodyMedium.copyWith(T),
-          ),
+          width: double.infinity,
+          child: previewContent,
         ),
         const SizedBox(
           height: 6,
@@ -32,7 +73,7 @@ class _LocationInputState extends State<LocationInput> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextButton.icon(
-              onPressed: () {},
+              onPressed: _getCurrentLocation,
               label: const Text("Add current location"),
               icon: const Icon(Icons.location_on),
             ),
