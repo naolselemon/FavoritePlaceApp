@@ -1,5 +1,6 @@
 import "dart:io";
 
+import "package:favorite_places/widgets/location_input.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
@@ -37,7 +38,9 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Add Favorite Place")),
+      appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          title: const Text("Add Favorite Place")),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
@@ -47,10 +50,9 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
               style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
               decoration: InputDecoration(
                 hintText: "Add Favorite Place",
-                hintStyle: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(color: colorScheme.onSurface),
+                hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: colorScheme.onSurface,
+                    ),
               ),
             ),
             const SizedBox(
@@ -69,6 +71,10 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
               label: const Text("Add Place"),
               icon: const Icon(Icons.add),
             ),
+            const SizedBox(
+              height: 12,
+            ),
+            LocationInput()
           ],
         ),
       ),
