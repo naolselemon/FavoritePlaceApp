@@ -1,5 +1,4 @@
 import "package:favorite_places/provider/place_provider.dart";
-import "package:favorite_places/screens/place_detail.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 
@@ -27,7 +26,7 @@ class _PlacesState extends ConsumerState<PlacesScreen> {
     final places = ref.watch(placeProvider);
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           title: Text(
             "Great Places",
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -38,7 +37,7 @@ class _PlacesState extends ConsumerState<PlacesScreen> {
             IconButton(
               icon: const Icon(Icons.add),
               onPressed: addNewPlace,
-            )
+            ),
           ],
         ),
         body: PlacesList(places: places));

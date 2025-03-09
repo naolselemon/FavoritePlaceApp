@@ -39,7 +39,7 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           title: const Text("Add Favorite Place")),
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -74,7 +74,7 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
             const SizedBox(
               height: 12,
             ),
-            LocationInput()
+            const LocationInput()
           ],
         ),
       ),
